@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 import { User } from 'src/app/models/user';
 import { LoginService } from 'src/app/services/login.service';
 
@@ -17,11 +18,18 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private appComponent: AppComponent
   ) { }
 
-  async ngOnInit() {
-
+  ngOnInit(): void {
+    if (sessionStorage.getItem("userData") != null) {
+      this.loginService.logout();
+      sessionStorage.removeItem("userData");
+      sessionStorage.removeItem("userName");
+      this.appComponent.createNavBar();
+    }
+    this.appComponent.setIsHome(false);
   }
 
   login(localForm: NgForm) {
@@ -30,19 +38,17 @@ export class LoginComponent implements OnInit {
     var password = localForm.value.contrasena;
     this.loginService.login(user, password).subscribe(
       reponse => {
-        console.log(reponse.ok);
         if (!reponse.ok) {
           this.loginService.logout();
         }
         this.user = Object.assign(new User(), reponse.body);
-        this.router.navigate(['/home', {id: this.user.id}]);
+        sessionStorage.setItem("userData", JSON.stringify(this.user));
+        console.log(this.user);
+        this.router.navigate(['/home']);
       },
       err => {
-        console.log("ksdjfhskdjh");
         this.errorLogin = true;
       }
     );
-    console.log(user);
-    console.log(password);
   }
 }

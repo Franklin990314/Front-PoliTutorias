@@ -7,18 +7,20 @@ import { Observable } from 'rxjs';
 })
 export class LoginService {
 
-  private url:string = "http://localhost:9090/api/login";
+  private url:string = "http://localhost:9090/";
+  private response: Observable<HttpResponse<Object>>;
 
   constructor(private http:HttpClient) { }
 
   login(user: String, password: String): Observable<HttpResponse<Object>>{
-    var url = this.url;
+    var url = this.url + "login";
     const httpHeaders = new HttpHeaders({Authorization: 'Basic ' + btoa(user + ":" + password)})
     return this.http.get<HttpResponse<Object>>(url, {headers: httpHeaders, observe: "response", withCredentials: true});
   }
 
   logout(){
-    console.log("logout")
-    this.http.get<HttpResponse<Object>>(this.url+"?logout");
+    var url = this.url + "api/logout";
+    this.response = this.http.get<HttpResponse<Object>>(url, {withCredentials: true});
+    this.response.subscribe();
   }
 }

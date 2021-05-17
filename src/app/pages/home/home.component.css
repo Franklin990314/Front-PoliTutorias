@@ -1,0 +1,39 @@
+.container {
+    display: flex;
+    justify-content: center;
+    padding: 10%;
+}
+
+.title h2 {
+    color: #0F385A;
+}
+
+.text-content {
+    color: #0F385A;
+    font-size: 24px;
+    text-align: justify;
+}
+
+.container-login-Poli {
+    width: 40%;
+    height: 40%;
+    border: 2px solid #0f385a;;
+    border-radius: 25px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    text-align: center;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+}
+
+.button input {
+    margin: 25px;
+}

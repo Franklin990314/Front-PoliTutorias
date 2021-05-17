@@ -1,3 +1,31 @@
-<div>
-    <router-outlet></router-outlet>
+<div class="container-Poli">
+    <nav class="navbar navbar-expand navbar-dark navbar-Poli">
+        <p class="navbar-brand-Poli non-padding-margin">{{title}}</p>
+    </nav>
+    <div class="container-fluid margin-logo-Poli">
+        <div *ngIf="userName; else elseBlock" class="row justify-content-center align-items-center minh-100">
+            <div class="col-xxs-5 col-xs-6 col-sm-6 col-md-4">
+                <a routerLink="home" class="nav-link"><img [src]="'assets/image/logo-poli2018.png'" id="logo"></a>
+            </div>
+            <div *ngIf="isHome" class="col-xxs-5 col-xs-6 col-sm-6 col-md-4">
+                <p class="name-Poli">Bienvenido, {{userName}}</p>
+            </div>
+            <div class="col-xxs-5 col-xs-6 col-sm-6 col-md-4 ref-Container">
+                <a routerLink="profile" class="nav-link navbar-brand">Perfil |</a>  
+                <a href="#" class="navbar-brand">Calendario |</a>
+                <a href="#" class="navbar-brand" style="margin-right: 50px;">Solicitudes |</a>
+                <a href="#" class="navbar-brand">Cerrar Sesión </a>
+            </div>
+        </div>
+        <ng-template #elseBlock>
+            <div class="row minh-100">
+                <div class="col-xxs-5 col-xs-6 col-sm-6 col-md-4">
+                    <a routerLink="login" class="nav-link"><img [src]="'assets/image/logo-poli2018.png'" id="logo"></a>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+    <div class="container full-height mt-3">
+        <router-outlet></router-outlet>
+    </div>
 </div>

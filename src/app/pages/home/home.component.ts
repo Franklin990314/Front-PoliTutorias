@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
+import { User } from 'src/app/models/user';
 import { UserProfile } from 'src/app/models/user-profile';
 import { ProfileService } from 'src/app/services/profile.service';
 
@@ -11,31 +13,29 @@ import { ProfileService } from 'src/app/services/profile.service';
 export class HomeComponent implements OnInit {
 
   public userId: number;
+  private userSession: User;
   public userProfile: UserProfile
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private appComponent: AppComponent
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-        // Defaults to 0 if no query param provided.
-        this.userId = parseInt(params.get('id'));
-        console.log(this.userId);
-      });
-    
-      this.profileService.getProfile(this.userId+'').subscribe(
+    this.userSession = JSON.parse( sessionStorage.getItem("userData") );
+    this.appComponent.setIsHome(true);
+
+    if (sessionStorage.getItem("userName") == null) {
+      this.profileService.getProfile(this.userSession.id+'').subscribe(
         reponse => {
-          reponse.headers;
-          console.log(reponse.headers);
-          console.log(reponse.body);
-        },
-        err => {
-          
+          this.userProfile = Object.assign(new UserProfile(), reponse.body);
+          sessionStorage.setItem("userName",this.userProfile.name);
+          this.appComponent.createNavBar();
         }
       );
+    }
   }
 
 }

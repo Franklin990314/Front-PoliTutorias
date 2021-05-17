@@ -1,0 +1,36 @@
+.container-Poli {
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+}
+
+.navbar-Poli {
+    justify-content: center; 
+    background-color: #0f385a;
+}
+
+.name-Poli {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    font-size:1.2rem;
+    color: #4D5656 ;
+}
+
+.ref-Container {
+    text-align: end;
+}
+
+.ref-Container a {
+    color: #0f385a;
+    font-size:1.2rem;
+}
+
+.navbar-brand-Poli {
+    font-size: 35px;
+    font-weight: bold;
+    color: white;
+}
+
+.margin-logo-Poli {
+    margin: 10px;
+}

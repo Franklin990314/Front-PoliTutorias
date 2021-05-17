@@ -1,1 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+    margin: 0px;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    font-family: 'Open Sans Condensed',sans-serif;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+html {
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.container-input {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.input-Poli {
+    width: 100%;
+    padding-left: 15%;
+    padding-right: 15%;
+    margin-bottom: 10px;
+}
+
+.non-padding-margin {
+    padding: 0px;
+    margin: 0px;
+}
+
+.btn-Poli {
+    font-size:1.2rem;
+    padding-left: 25px;
+    padding-right: 25px;
+    background-color: #0f385a;
+    border-color: #0f385a;
+}

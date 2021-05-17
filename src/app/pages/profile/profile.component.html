@@ -1,1 +1,74 @@
-<p>profile works!</p>
+<div class="container container-login-Poli">
+    <div class="full-width">
+        <div class="icon-profile">
+            <img [src]="'assets/image/profile-logo.png'" id="logo">
+        </div>
+        <div style="margin-bottom: 8%;">
+            <div class="row container-input">
+                <div class="col-xs-12 input-Poli">
+                    <div class="col-md-3 label-Poli">
+                        <label for="isbn">Nombre:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input disabled type="text" class="form-control ent ent-name" id="name" name="name"
+                            autocomplete="off" [(ngModel)]="userProfile.name">
+                    </div>
+                </div>
+            </div>
+            <div class="row container-input">
+                <div class="col-xs-12 input-Poli">
+                    <div class="col-md-3 label-Poli">
+                        <label for="isbn">Código:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input disabled type="text" class="form-control ent ent-code" id="code" name="code"
+                            autocomplete="off" [(ngModel)]="userProfile.code">
+                    </div>
+                </div>
+            </div>
+            <div class="row container-input">
+                <div class="col-xs-12 input-Poli">
+                    <div class="col-md-3 label-Poli">
+                        <label for="isbn">Correo:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input disabled type="text" class="form-control ent ent-mail" id="mail" name="mail"
+                            autocomplete="off" [(ngModel)]="userProfile.mail">
+                    </div>
+                </div>
+            </div>
+            <div class="row container-input">
+                <div class="col-xs-12 input-Poli">
+                    <div class="col-md-3 label-Poli">
+                        <label for="isbn">Programa:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input disabled type="text" class="form-control ent ent-program" id="program" name="program"
+                            autocomplete="off" [(ngModel)]="userProfile.program">
+                    </div>
+                </div>
+            </div>
+            <div class="row container-input">
+                <div class="col-xs-12 input-Poli">
+                    <div class="col-md-3 label-Poli">
+                        <label for="isbn">Celular:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input disabled type="text" class="form-control ent ent-cell_phone" id="cell_phone"
+                            name="cell_phone" autocomplete="off" [(ngModel)]="userProfile.cell_phone">
+                    </div>
+                </div>
+            </div>
+            <div class="row container-input">
+                <div class="col-xs-12 input-Poli">
+                    <div class="text-content">
+                        <p>*Importante: Si desea modificar o actualizar su información personal comuníquese con el administrador del sistema.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="button">
+                <input class="btn btn-primary btn-Poli" type="button" value="Aceptar" (click)="onClick()">
+            </div>
+        </div>
+    </div>
+</div>
