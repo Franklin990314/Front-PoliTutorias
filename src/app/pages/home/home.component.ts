@@ -38,4 +38,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  schedule(): void {
+    this.router.navigateByUrl("/schedule");
+  }
 }

@@ -1,0 +1,77 @@
+<div class="container container-Poli">
+    <div class="full-width">
+        <div>
+            <form #localForm='ngForm' (ngSubmit)="submit()" accept-charset="UTF-8" role="form">
+                <div class="row container-input">
+                    <div class="col-xs-12 input-Poli">
+                        <div class="col-md-3 label-Poli">
+                            <label for="isbn">Programa:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input disabled type="text" class="form-control ent ent-collegeCareer" id="collegeCareer" name="collegeCareer"
+                                autocomplete="off" [(ngModel)]="tutorial.collegeCareer">
+                        </div>
+                    </div>
+                </div>
+                <div class="row container-input">
+                    <div class="col-xs-12 input-Poli">
+                        <div class="col-md-3 label-Poli">
+                            <label for="isbn">Materia:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control ent ent-course" id="course" name="course"
+                                autocomplete="off" [(ngModel)]="tutorial.course">
+                        </div>
+                    </div>
+                </div>
+                <div class="row container-input">
+                    <div class="col-xs-12 input-Poli">
+                        <div class="col-md-3 label-Poli">
+                            <label for="isbn">Docente:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control ent ent-instructor" id="instructor" name="instructor"
+                                autocomplete="off" [(ngModel)]="tutorial.instructor">
+                        </div>
+                    </div>
+                </div>
+                <div class="row container-input">
+                    <div class="col-xs-12 input-Poli">
+                        <div class="col-md-3 label-Poli">
+                            <label for="isbn">Días:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control ent ent-availabilityDate" id="availabilityDate" name="availabilityDate"
+                                autocomplete="off" [(ngModel)]="tutorial.availabilityDate">
+                        </div>
+                    </div>
+                </div>
+                <div class="row container-input">
+                    <div class="col-xs-12 input-Poli">
+                        <div class="col-md-3 label-Poli">
+                            <label for="isbn">Hora Inicio:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control ent ent-availabilityStartTime" id="availabilityStartTime"
+                                name="availabilityStartTime" autocomplete="off" [(ngModel)]="tutorial.availabilityStartTime">
+                        </div>
+                    </div>
+                </div>
+                <div class="row container-input">
+                    <div class="col-xs-12 input-Poli">
+                        <div class="col-md-3 label-Poli">
+                            <label for="isbn">Hora Fin:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control ent ent-availabilityEndTime" id="availabilityEndTime"
+                                name="availabilityEndTime" autocomplete="off" [(ngModel)]="tutorial.availabilityEndTime">
+                        </div>
+                    </div>
+                </div>
+                <div class="button">
+                    <input class="btn btn-primary btn-Poli" type="submit" value="Agendar">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
