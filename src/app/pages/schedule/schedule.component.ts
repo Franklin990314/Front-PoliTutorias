@@ -10,7 +10,7 @@ import { User } from 'src/app/models/user';
 export class ScheduleComponent implements OnInit {
 
   public tutorial: Tutorial;
-  public courses: string[] = ['Desarrollo Web', 'Ingles Basico 1'];
+  public courses: string[] = ['Desarrollo Web', 'Ingles Basico 1', 'Paradigmas', 'Pensamiento Algortimico'];
   private userSession: User;
   
   constructor() { }
