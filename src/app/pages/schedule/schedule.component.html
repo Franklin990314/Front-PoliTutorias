@@ -8,19 +8,20 @@
                             <label for="isbn">Programa:</label>
                         </div>
                         <div class="col-md-9">
-                            <input disabled type="text" class="form-control ent ent-collegeCareer" id="collegeCareer" name="collegeCareer"
-                                autocomplete="off" [(ngModel)]="tutorial.collegeCareer">
+                            <input disabled type="text" class="form-control ent ent-collegeCareer" id="collegeCareer"
+                                name="collegeCareer" autocomplete="off" [(ngModel)]="tutorial.collegeCareer">
                         </div>
                     </div>
                 </div>
                 <div class="row container-input">
                     <div class="col-xs-12 input-Poli">
                         <div class="col-md-3 label-Poli">
-                            <label for="isbn">Materia:</label>
+                            <label for="courses">Materia:</label>
                         </div>
                         <div class="col-md-9">
-                            <input type="text" class="form-control ent ent-course" id="course" name="course"
-                                autocomplete="off" [(ngModel)]="tutorial.course">
+                            <select class="form-control ent ent-course" id="course" name="course">
+                                <option *ngFor="let course of courses" [ngValue]="course">{{ course }}</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -30,19 +31,23 @@
                             <label for="isbn">Docente:</label>
                         </div>
                         <div class="col-md-9">
-                            <input type="text" class="form-control ent ent-instructor" id="instructor" name="instructor"
-                                autocomplete="off" [(ngModel)]="tutorial.instructor">
+                            <select class="form-control ent ent-instructor" id="instructor" name="instructor">
+                                <option *ngFor="let instructor of instructors" [ngValue]="instructor">{{ instructor }}
+                                </option>
+                            </select>
                         </div>
                     </div>
                 </div>
                 <div class="row container-input">
                     <div class="col-xs-12 input-Poli">
                         <div class="col-md-3 label-Poli">
-                            <label for="isbn">Días:</label>
+                            <label for="days">Días:</label>
                         </div>
                         <div class="col-md-9">
-                            <input type="text" class="form-control ent ent-availabilityDate" id="availabilityDate" name="availabilityDate"
-                                autocomplete="off" [(ngModel)]="tutorial.availabilityDate">
+                            <ng-select name="availabilityDate" bindLabel="name" appendTo="body" multiple="true"
+                                [(ngModel)]="tutorial.availabilityDate" class="form-control ent ent-availabilityDate">
+                                <ng-option *ngFor="let value of days" [value]="value">{{ value.day }}</ng-option>
+                            </ng-select>
                         </div>
                     </div>
                 </div>
@@ -52,8 +57,9 @@
                             <label for="isbn">Hora Inicio:</label>
                         </div>
                         <div class="col-md-9">
-                            <input type="text" class="form-control ent ent-availabilityStartTime" id="availabilityStartTime"
-                                name="availabilityStartTime" autocomplete="off" [(ngModel)]="tutorial.availabilityStartTime">
+                            <input type="text" class="form-control ent ent-availabilityStartTime" placeholder="hh:mm"
+                                id="availabilityStartTime" name="availabilityStartTime" autocomplete="off"
+                                [(ngModel)]="tutorial.availabilityStartTime">
                         </div>
                     </div>
                 </div>
@@ -64,7 +70,8 @@
                         </div>
                         <div class="col-md-9">
                             <input type="text" class="form-control ent ent-availabilityEndTime" id="availabilityEndTime"
-                                name="availabilityEndTime" autocomplete="off" [(ngModel)]="tutorial.availabilityEndTime">
+                                name="availabilityEndTime" autocomplete="off" placeholder="hh:mm"
+                                [(ngModel)]="tutorial.availabilityEndTime">
                         </div>
                     </div>
                 </div>

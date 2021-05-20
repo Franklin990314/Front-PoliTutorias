@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "PoliTutorias"
+    }
+  },
+  "defaultProject": "PoliTutorias",
+  "cli": {
+    "analytics": false
+  }
 }

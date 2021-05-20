@@ -8,6 +8,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { ScheduleComponent } from './pages/schedule/schedule.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { PetitionComponent } from './pages/petition/petition.component';
 
 @NgModule({
   declarations: [
@@ -15,12 +17,14 @@ import { ScheduleComponent } from './pages/schedule/schedule.component';
     ProfileComponent,
     LoginComponent,
     ScheduleComponent,
+    PetitionComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
