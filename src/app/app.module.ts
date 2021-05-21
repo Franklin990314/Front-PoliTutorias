@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ScheduleComponent } from './pages/schedule/schedule.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PetitionComponent } from './pages/petition/petition.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { PetitionComponent } from './pages/petition/petition.component';
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    NgSelectModule
+    NgSelectModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

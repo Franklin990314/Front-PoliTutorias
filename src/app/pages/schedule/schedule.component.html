@@ -1,7 +1,7 @@
 <div class="container container-Poli">
     <div class="full-width">
         <div>
-            <form #localForm='ngForm' (ngSubmit)="submit()" accept-charset="UTF-8" role="form">
+            <form #localForm='ngForm' (ngSubmit)="submit(modalInfo)" accept-charset="UTF-8" role="form">
                 <div class="row container-input">
                     <div class="col-xs-12 input-Poli">
                         <div class="col-md-3 label-Poli">
@@ -19,8 +19,8 @@
                             <label for="courses">Materia:</label>
                         </div>
                         <div class="col-md-9">
-                            <select class="form-control ent ent-course" id="course" name="course">
-                                <option *ngFor="let course of courses" [ngValue]="course">{{ course }}</option>
+                            <select required class="form-control ent ent-course" id="course" name="course" (change)="onChange()" [(ngModel)]="tutorial.course">
+                                <option *ngFor="let course of courses.parameter" [ngValue]="course.id">{{ course.value }}</option>
                             </select>
                         </div>
                     </div>
@@ -31,8 +31,8 @@
                             <label for="isbn">Docente:</label>
                         </div>
                         <div class="col-md-9">
-                            <select class="form-control ent ent-instructor" id="instructor" name="instructor">
-                                <option *ngFor="let instructor of instructors" [ngValue]="instructor">{{ instructor }}
+                            <select required class="form-control ent ent-instructor" id="instructor" name="instructor" [(ngModel)]="tutorial.instructor">
+                                <option *ngFor="let instructor of instructors.parameter" [ngValue]="instructor.id">{{ instructor.value  }}
                                 </option>
                             </select>
                         </div>
@@ -44,9 +44,9 @@
                             <label for="days">Días:</label>
                         </div>
                         <div class="col-md-9">
-                            <ng-select name="availabilityDate" bindLabel="name" appendTo="body" multiple="true"
+                            <ng-select required name="availabilityDate" bindLabel="name" appendTo="body" multiple="true"
                                 [(ngModel)]="tutorial.availabilityDate" class="form-control ent ent-availabilityDate">
-                                <ng-option *ngFor="let value of days" [value]="value">{{ value.day }}</ng-option>
+                                <ng-option *ngFor="let day of days" [value]="day">{{ day }}</ng-option>
                             </ng-select>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                             <label for="isbn">Hora Inicio:</label>
                         </div>
                         <div class="col-md-9">
-                            <input type="text" class="form-control ent ent-availabilityStartTime" placeholder="hh:mm"
+                            <input required type="text" class="form-control ent ent-availabilityStartTime" placeholder="hh:mm"
                                 id="availabilityStartTime" name="availabilityStartTime" autocomplete="off"
                                 [(ngModel)]="tutorial.availabilityStartTime">
                         </div>
@@ -69,16 +69,27 @@
                             <label for="isbn">Hora Fin:</label>
                         </div>
                         <div class="col-md-9">
-                            <input type="text" class="form-control ent ent-availabilityEndTime" id="availabilityEndTime"
+                            <input required type="text" class="form-control ent ent-availabilityEndTime" id="availabilityEndTime"
                                 name="availabilityEndTime" autocomplete="off" placeholder="hh:mm"
                                 [(ngModel)]="tutorial.availabilityEndTime">
                         </div>
                     </div>
                 </div>
                 <div class="button">
-                    <input class="btn btn-primary btn-Poli" type="submit" value="Agendar">
+                    <input class="btn btn-primary btn-Poli" type="submit" value="Agendar" [disabled]="!localForm.valid">
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+<ng-template #modalInfo let-modal>
+    <div class="modal-body">
+        <div style="width: 400px; margin: auto; text-align: center;">
+            <p>Su caso ha sido creado con el radicado: {{ registeredId }}</p>
+        </div>
+    </div>
+    <div class="modal-footer" style="align-self: center;">
+        <button type="button" class="btn btn-primary btn-Poli" (click)="modal.close('Save click')">Aceptar</button>
+    </div>
+</ng-template>

@@ -11,7 +11,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 })
 export class ProfileComponent implements OnInit {
 
-  public userProfile: UserProfile;
+  public userProfile: UserProfile = new UserProfile;
   private userSession: User;
 
   constructor(

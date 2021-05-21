@@ -3,6 +3,7 @@ export class UserProfile {
     name: string;
     code: string;
     mail: string;
+    faculty: string;
     program: string;
     cell_phone: string;
 

@@ -11,6 +11,12 @@
     display: flex;
 }
 
+.modal-body p {
+    color:#0f385a;
+    font-style: italic;
+    margin: 15px;
+}
+
 .container-Poli {
     width: 65%;
     height: 50%;

@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
         reponse => {
           this.userProfile = Object.assign(new UserProfile(), reponse.body);
           sessionStorage.setItem("userName",this.userProfile.name);
+          sessionStorage.setItem("program", this.userProfile.program)
           this.appComponent.createNavBar();
         }
       );

@@ -49,3 +49,7 @@ html {
     background-color: #0f385a;
     border-color: #0f385a;
 }
+
+.modal-Poli .modal-dialog {
+    max-width: 700px !important;
+}

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Parameter } from 'src/app/models/parameter';
 import { Tutorial } from 'src/app/models/tutorial';
 import { User } from 'src/app/models/user';
+import { ParameterService } from 'src/app/services/parameter.service';
+import { TutorialService } from 'src/app/services/tutorial.service';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-schedule',
@@ -9,27 +13,69 @@ import { User } from 'src/app/models/user';
 })
 export class ScheduleComponent implements OnInit {
 
-  public tutorial: Tutorial = new Tutorial;
-  public courses = ['Seleccione','Desarrollo Web', 'Ingles Basico 1', 'Paradigmas', 'Pensamiento Algoritmico'];
-  public instructors = ['Seleccione', 'Wilson Soto', 'Victor Pedraza', 'Gabriel Avila', 'Francisco Gonzalez','Juan Carlos Vargas'];
-  days = [
-    {id: 1, day: 'Lunes'},
-    {id: 2, day: 'Martes'},
-    {id: 3, day: 'Miercoles'},
-    {id: 4, day: 'Jueves'},
-    {id: 5, day: 'Viernes'},
-    {id: 6, day: 'Sábado'}
-  ];
+  public tutorial: Tutorial = new Tutorial();
+  public tutorialResponse: Tutorial = new Tutorial();
+  public courses: Parameter = new Parameter();
+  public instructors: Parameter = new Parameter();
+  public days = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado'];
   private userSession: User;
+  public closeModal: string;
+  public registeredId: number;
   
-  constructor() { }
+  constructor(
+    private parameterService: ParameterService,
+    private tutorialService: TutorialService,
+    private modalService: NgbModal
+  ) { }
 
   ngOnInit(): void {
     this.userSession = JSON.parse(sessionStorage.getItem("userData"));
+    this.tutorial.collegeCareer = sessionStorage.getItem("program");
+
+    this.parameterService.getCourses().subscribe(
+      reponse => {
+        this.courses = Object.assign(new Parameter(), reponse.body);
+      }
+    );
   }
 
-  submit(): void {
+  submit(content: any): void {
+    console.log(this.tutorial)
+    this.tutorialService.post(this.tutorial).subscribe(
+      reponse => {
+        this.tutorialResponse = Object.assign(new Tutorial(), reponse.body);
+        this.registeredId = this.tutorialResponse.id;
+        this.openModal(content);
+      }
+    );
+  }
 
+  openModal(content: any){
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((res) => {
+      this.closeModal = `Closed with: ${res}`;
+      this.tutorial = new Tutorial();
+      this.ngOnInit();
+    }, (res) => {
+      this.closeModal = `Dismissed ${this.getDismissReason(res)}`;
+    });
+  }
+
+  onChange(): void {
+    this.parameterService.getInstructors(this.tutorial.course).subscribe(
+      reponse => {
+        this.instructors = Object.assign(new Parameter(), reponse.body);
+      }
+    );
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
 }
