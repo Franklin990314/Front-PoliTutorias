@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { User } from 'src/app/models/user';
@@ -13,33 +13,29 @@ import { ProfileService } from 'src/app/services/profile.service';
 export class HomeComponent implements OnInit {
 
   public userId: number;
-  private userSession: User;
-  public userProfile: UserProfile
+  public userProfile: UserProfile;
+  public isTeacher: boolean = null;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private profileService: ProfileService,
     private appComponent: AppComponent
-  ) { }
-
-  ngOnInit(): void {
-    this.userSession = JSON.parse( sessionStorage.getItem("userData") );
-    this.appComponent.setIsHome(true);
-
-    if (sessionStorage.getItem("userName") == null) {
-      this.profileService.getProfile(this.userSession.id+'').subscribe(
-        reponse => {
-          this.userProfile = Object.assign(new UserProfile(), reponse.body);
-          sessionStorage.setItem("userName",this.userProfile.name);
-          sessionStorage.setItem("program", this.userProfile.program)
-          this.appComponent.createNavBar();
-        }
-      );
-    }
+  ) {
+    this.isTeacher = (sessionStorage.getItem("role") == "true");
+    this.reloadPage();
   }
+
+  reloadPage(): void {
+    if (!this.appComponent.getIsHome()) window.location.reload();
+  }
+
+  ngOnInit(): void { }
 
   schedule(): void {
     this.router.navigateByUrl("/schedule");
+  }
+
+  petition(): void {
+    this.router.navigateByUrl("/petition");
   }
 }

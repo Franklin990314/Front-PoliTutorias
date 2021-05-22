@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from './models/user';
 
 @Component({
   selector: 'app-root',
@@ -7,19 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'Poli Tutorías';
-  userName: string = null;
-  isHome: boolean;
+  public userName: string = null;
+  public isHome: boolean = false;
+  public isTeacher: boolean = null;
 
-  ngOnInit(): void {
-    this.isHome = false;
-    if (sessionStorage.getItem("userName") != null) {
-      this.userName = sessionStorage.getItem("userName");
-    } else {
-      this.userName = null;
-    }
+  constructor() {
+    this.createNavbar();
   }
 
-  createNavBar() {
+  ngOnInit(): void { }
+
+  createNavbar() {
+    if (sessionStorage.getItem("userData") != null) {
+      this.isTeacher = (sessionStorage.getItem("role") == "true");
+      this.isHome = true;
+    }
     if (sessionStorage.getItem("userName") != null) {
       this.userName = sessionStorage.getItem("userName");
     } else {
@@ -29,5 +32,9 @@ export class AppComponent implements OnInit {
 
   setIsHome(ishome: boolean) {
     this.isHome = ishome;
+  }
+
+  getIsHome(): boolean {
+    return this.isHome;
   }
 }

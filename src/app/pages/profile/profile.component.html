@@ -3,7 +3,7 @@
         <div class="icon-profile">
             <img [src]="'assets/image/profile-logo.png'" id="logo">
         </div>
-        <div style="margin-bottom: 8%;">
+        <div>
             <div class="row container-input">
                 <div class="col-xs-12 input-Poli">
                     <div class="col-md-3 label-Poli">
@@ -40,14 +40,27 @@
             <div class="row container-input">
                 <div class="col-xs-12 input-Poli">
                     <div class="col-md-3 label-Poli">
-                        <label for="isbn">Programa:</label>
+                        <label for="isbn">Facultad:</label>
                     </div>
                     <div class="col-md-9">
-                        <input disabled type="text" class="form-control ent ent-program" id="program" name="program"
-                            autocomplete="off" [(ngModel)]="userProfile.program">
+                        <input disabled type="text" class="form-control ent ent-faculty" id="faculty" name="faculty"
+                            autocomplete="off" [(ngModel)]="userProfile.faculty">
                     </div>
                 </div>
             </div>
+            <ng-container *ngIf="!isTeacher">
+                <div class="row container-input">
+                    <div class="col-xs-12 input-Poli">
+                        <div class="col-md-3 label-Poli">
+                            <label for="isbn">Programa:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input disabled type="text" class="form-control ent ent-program" id="program" name="program"
+                                autocomplete="off" [(ngModel)]="userProfile.program">
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
             <div class="row container-input">
                 <div class="col-xs-12 input-Poli">
                     <div class="col-md-3 label-Poli">

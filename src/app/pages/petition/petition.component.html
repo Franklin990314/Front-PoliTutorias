@@ -1,32 +1,51 @@
+<div class="home-Poli" style="margin-bottom: 4%; text-align: left;">
+    <a routerLink="home" class="nav-link navbar-brand" (click)="routerHome()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+            class="bi bi-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+        </svg> Home
+    </a>
+</div>
 <div class="container">
     <div class="full-width">
-        <div class="title" style="margin-bottom: 4%;">
-            <a routerLink="home" class="nav-link navbar-brand" (click)="onClick()">
-                <h6>← Volver</h6>
-            </a>
-        </div>
         <div style="margin-bottom: 8%;" class="container container-Poli">
             <table class="table table-striped">
                 <thead>
                     <th>Nº Solicitud</th>
-                    <th>Nombre Docente</th>
+                    <ng-container *ngIf="!isTeacher">
+                        <th>Nombre Docente</th>
+                    </ng-container>
+                    <ng-container *ngIf="isTeacher">
+                        <th>Nombre Estudiante</th>
+                    </ng-container>
                     <th>Materia</th>
+                    <th>Estado</th>
                     <th></th>
                     <th>Acción</th>
                 </thead>
                 <tbody>
                     <tr *ngFor="let tutorial of tutorialSet; let i = index ">
                         <td>{{tutorial.idString}}</td>
-                        <td>{{tutorial.instructor}}</td>
+                        <ng-container *ngIf="!isTeacher">
+                            <td>{{tutorial.instructor}}</td>
+                        </ng-container>
+                        <ng-container *ngIf="isTeacher">
+                            <td>{{tutorial.student}}</td>
+                        </ng-container>
                         <td>{{tutorial.course}}</td>
+                        <td>{{tutorial.status}}</td>
                         <td><button class="btn btn-info btn-sm" (click)="infoModal(modalInfo, tutorial.id)">
                                 + ver más </button></td>
                         <td>
-                            <button class="btn btn-info btn-sm" (click)="updateModal(modalData, tutorial)">
+                            <button class="btn btn-info btn-sm" (click)="updateModal(modalData, modalNonUpdate, tutorial)">
                                 Editar </button>
-                            &nbsp;
-                            <button class='btn btn-danger btn-sm' (click)="deleteTutorial(tutorial.id)">
-                                Eliminar</button>
+                            <ng-container *ngIf="!isTeacher">
+                                &nbsp;
+                                <button class='btn btn-danger btn-sm' (click)="deleteTutorial(tutorial.id)">
+                                    Eliminar</button>
+                            </ng-container>
+                            
                         </td>
                     </tr>
                 </tbody>
@@ -116,8 +135,9 @@
                         <label for="isbn">Disponibilidad Sugerida:</label>
                     </div>
                     <div class="col-md-9">
-                        <input disabled type="text" class="form-control ent ent-availabilityStartTime" id="availabilityStartTime" name="availabilityStartTime"
-                            autocomplete="off" [(ngModel)]="currentTutorial.availabilityStartTime">
+                        <input disabled type="text" class="form-control ent ent-availabilityStartTime"
+                            id="availabilityStartTime" name="availabilityStartTime" autocomplete="off"
+                            [(ngModel)]="currentTutorial.availabilityStartTime">
                     </div>
                 </div>
             </div>
@@ -148,7 +168,7 @@
         </button>
     </div>
     <div class="modal-body" style="padding-top: 30px;">
-        <form #localForm='ngForm' (ngSubmit)="submit()" accept-charset="UTF-8" role="form">
+        <form #localFormUpdate='ngForm' (ngSubmit)="submit()" accept-charset="UTF-8" role="form">
             <div>
                 <div class="row container-input">
                     <div class="col-xs-12 input-Poli">
@@ -156,8 +176,8 @@
                             <label for="isbn">Id:</label>
                         </div>
                         <div class="col-md-9">
-                            <input disabled type="text" class="form-control ent ent-idString" id="idString" name="idString"
-                                autocomplete="off" [(ngModel)]="updateTutorial.idString">
+                            <input disabled type="text" class="form-control ent ent-idString" id="idString"
+                                name="idString" autocomplete="off" [(ngModel)]="updateTutorial.idString">
                         </div>
                     </div>
                 </div>
@@ -178,8 +198,9 @@
                             <label for="isbn">Estado:</label>
                         </div>
                         <div class="col-md-9">
-                            <select required class="form-control ent ent-instructor" id="status" name="status" [(ngModel)]="updateTutorial.status">
-                                <option *ngFor="let status of statusSet" [ngValue]="status">{{ status  }}
+                            <select required class="form-control ent ent-instructor" id="status" name="status"
+                                [(ngModel)]="updateTutorial.status">
+                                <option *ngFor="let status of statusSet" [ngValue]="status">{{ status }}
                                 </option>
                             </select>
                         </div>
@@ -207,43 +228,67 @@
                         </div>
                     </div>
                 </div>
-                <div class="row container-input">
-                    <div class="col-xs-12 input-Poli">
-                        <div class="col-md-3 label-Poli">
-                            <label for="days">Días:</label>
-                        </div>
-                        <div class="col-md-9">
-                            <ng-select required name="availabilityDate" bindLabel="name" appendTo="body" multiple="true"
-                                [(ngModel)]="updateTutorial.availabilityDate" class="form-control ent ent-availabilityDate">
-                                <ng-option *ngFor="let day of days" [value]="day">{{ day }}</ng-option>
-                            </ng-select>
+                <ng-container *ngIf="updateTutorial.status == 'Devuelta por Instructor'">
+                    <div class="row container-input">
+                        <div class="col-xs-12 input-Poli">
+                            <div class="col-md-12 title-label-Poli">
+                                <label for="isbn">Horario Sugerido</label>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row container-input">
-                    <div class="col-xs-12 input-Poli">
-                        <div class="col-md-3 label-Poli">
-                            <label for="isbn">Hora Inicio:</label>
-                        </div>
-                        <div class="col-md-9">
-                            <input required type="text" class="form-control ent ent-availabilityStartTime" placeholder="hh:mm"
-                                id="availabilityStartTime" name="availabilityStartTime" autocomplete="off"
-                                [(ngModel)]="updateTutorial.availabilityStartTime">
-                        </div>
-                    </div>
-                </div>
-                <div class="row container-input">
-                    <div class="col-xs-12 input-Poli">
-                        <div class="col-md-3 label-Poli">
-                            <label for="isbn">Hora Fin:</label>
-                        </div>
-                        <div class="col-md-9">
-                            <input required type="text" class="form-control ent ent-availabilityEndTime" id="availabilityEndTime"
-                                name="availabilityEndTime" autocomplete="off" placeholder="hh:mm"
-                                [(ngModel)]="updateTutorial.availabilityEndTime">
+                    <div class="row container-input">
+                        <div class="col-xs-12 input-Poli">
+                            <div class="col-md-3 label-Poli">
+                                <label for="days">Días:</label>
+                            </div>
+                            <div class="col-md-9">
+                                <ng-select required name="availabilityDate" bindLabel="name" appendTo="body" multiple="true"
+                                    [(ngModel)]="updateTutorial.availabilityDate"
+                                    class="form-control ent ent-availabilityDate">
+                                    <ng-option *ngFor="let day of days" [value]="day">{{ day }}</ng-option>
+                                </ng-select>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div class="row container-input">
+                        <div class="col-xs-12 input-Poli">
+                            <div class="col-md-3 label-Poli">
+                                <label for="isbn">Hora Inicio:</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input required type="text" class="form-control ent ent-availabilityStartTime"
+                                    placeholder="hh:mm" id="availabilityStartTime" name="availabilityStartTime"
+                                    autocomplete="off" [(ngModel)]="updateTutorial.availabilityStartTime">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row container-input">
+                        <div class="col-xs-12 input-Poli">
+                            <div class="col-md-3 label-Poli">
+                                <label for="isbn">Hora Fin:</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input required type="text" class="form-control ent ent-availabilityEndTime"
+                                    id="availabilityEndTime" name="availabilityEndTime" autocomplete="off"
+                                    placeholder="hh:mm" [(ngModel)]="updateTutorial.availabilityEndTime">
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="updateTutorial.status == 'Agendada'">
+                    <div class="row container-input">
+                        <div class="col-xs-12 input-Poli">
+                            <div class="col-md-3 label-Poli">
+                                <label for="days">Fecha de Agendamiento:</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input required type="text" class="form-control ent ent-scheduledDate"
+                                    id="scheduledDate" name="scheduledDate" autocomplete="off"
+                                    placeholder="hh:mm" [(ngModel)]="updateTutorial.scheduledDate">
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
                 <div class="row container-input">
                     <div class="col-xs-12 input-Poli">
                         <div class="col-md-3 label-Poli">
@@ -257,8 +302,26 @@
                 </div>
             </div>
             <div class="modal-footer" style="justify-content: center;">
-                <button type="submit" class="btn btn-primary btn-Poli" [disabled]="!localForm.valid">Guardar</button>
+                <input class="btn btn-primary btn-Poli" type="submit" value="Guardar" [disabled]="!localFormUpdate.valid">
             </div>
         </form>
+    </div>
+</ng-template>
+
+<ng-template #modalNonUpdate let-modal>
+    <div class="modal-body">
+        <div style="width: 400px; margin: auto; text-align: center;">
+            <p>El radicado: {{ updateTutorial.idString }} se encuentra en estado {{ updateTutorial.status  }}, 
+            <ng-container *ngIf="!isTeacher">
+                tiene que esperar a que el docente asignado gestione la petición
+            </ng-container>
+            <ng-container *ngIf="isTeacher">
+                tiene que esperar a que el estudiante asignado gestione la petición
+            </ng-container>
+            </p>
+        </div>
+    </div>
+    <div class="modal-footer" style="align-self: center;">
+        <button type="button" class="btn btn-primary btn-Poli" (click)="modal.close('Save click')">Aceptar</button>
     </div>
 </ng-template>

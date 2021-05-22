@@ -5,6 +5,8 @@ import { User } from 'src/app/models/user';
 import { ParameterService } from 'src/app/services/parameter.service';
 import { TutorialService } from 'src/app/services/tutorial.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AppComponent } from 'src/app/app.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-schedule',
@@ -20,17 +22,20 @@ export class ScheduleComponent implements OnInit {
   public days = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado'];
   private userSession: User;
   public closeModal: string;
-  public registeredId: number;
+  public registeredId: string;
   
   constructor(
+    private router: Router,
     private parameterService: ParameterService,
     private tutorialService: TutorialService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private appComponent: AppComponent
   ) { }
 
   ngOnInit(): void {
     this.userSession = JSON.parse(sessionStorage.getItem("userData"));
     this.tutorial.collegeCareer = sessionStorage.getItem("program");
+    this.appComponent.setIsHome(false);
 
     this.parameterService.getCourses().subscribe(
       reponse => {
@@ -44,7 +49,7 @@ export class ScheduleComponent implements OnInit {
     this.tutorialService.post(this.tutorial).subscribe(
       reponse => {
         this.tutorialResponse = Object.assign(new Tutorial(), reponse.body);
-        this.registeredId = this.tutorialResponse.id;
+        this.registeredId = this.tutorialResponse.idString;
         this.openModal(content);
       }
     );
@@ -76,6 +81,10 @@ export class ScheduleComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  routerHome() {
+    this.router.navigateByUrl("/home")
   }
 
 }

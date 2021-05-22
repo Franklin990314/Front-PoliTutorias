@@ -8,12 +8,16 @@
                 <a routerLink="home" class="nav-link"><img [src]="'assets/image/logo-poli2018.png'" id="logo"></a>
             </div>
             <div class="col-xxs-5 col-xs-6 col-sm-6 col-md-4">
-                <p class="name-Poli">Bienvenido, {{userName}}</p>
+                <ng-container *ngIf="isHome">
+                    <p class="name-Poli">Bienvenido, {{userName}}</p>
+                </ng-container>
             </div>
             <div class="col-xxs-5 col-xs-6 col-sm-6 col-md-4 ref-Container">
                 <a routerLink="profile" class="nav-link navbar-brand">Perfil |</a>  
-                <a href="#" class="navbar-brand">Calendario |</a>
-                <a routerLink="petition" class="nav-link navbar-brand" style="margin-right: 50px;">Solicitudes |</a>
+                <a routerLink="home" class="nav-link navbar-brand">Calendario |</a>
+                <ng-container *ngIf="!isTeacher">
+                    <a routerLink="petition" class="nav-link navbar-brand" style="margin-right: 50px;">Solicitudes |</a>
+                </ng-container>
                 <a routerLink="login" class="nav-link navbar-brand">Cerrar Sesión </a>
             </div>
         </div>

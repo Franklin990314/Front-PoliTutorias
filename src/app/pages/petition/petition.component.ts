@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AppComponent } from 'src/app/app.component';
 import { Tutorial } from 'src/app/models/tutorial';
 import { Tutorials } from 'src/app/models/tutorials';
 import { User } from 'src/app/models/user';
@@ -20,16 +21,22 @@ export class PetitionComponent implements OnInit {
   private userSession: User;
   public closeModal: string;
   public days = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado'];
-  public statusSet = ['Devuelta por Alumno', 'Agendada', 'Finalizada'];
+  public statusSet = [''];
+  public isTeacher: boolean;
 
   constructor(
     private router: Router,
     private tutorialService: TutorialService,
-    private modalService: NgbModal
-  ) { }
+    private modalService: NgbModal,
+    private appComponent: AppComponent
+  ) { 
+    this.isTeacher = (sessionStorage.getItem("role") == "true");
+  }
 
   ngOnInit(): void {
     this.userSession = JSON.parse(sessionStorage.getItem("userData"));
+    this.appComponent.setIsHome(false);
+
     this.tutorialService.getAll().subscribe(
       reponse => {
         this.tutorials = Object.assign(new Tutorials(), reponse.body);
@@ -39,7 +46,7 @@ export class PetitionComponent implements OnInit {
 
   }
 
-  onClick() {
+  routerHome() {
     this.router.navigateByUrl("/home")
   }
 
@@ -52,9 +59,32 @@ export class PetitionComponent implements OnInit {
     );
   }
 
-  updateModal(content: any, val: Tutorial) {
-    this.updateTutorial = val;
-    this.openModal(content);
+  updateModal(content: any, nonUpdate: any, val: Tutorial) {
+    this.updateTutorial = new Tutorial();
+    this.updateTutorial.idString = val.idString;
+    this.updateTutorial.course = val.course;
+    this.updateTutorial.instructor = val.instructor;
+    this.updateTutorial.student = val.student;
+    this.updateTutorial.availabilityDate = val.availabilityDate;
+    if (this.isTeacher) {
+      if (val.status == 'Creada' || val.status == 'Devuelta por Alumno') {
+        this.statusSet = ['Devuelta por Instructor', 'Agendada'];
+        this.openModal(content);
+      } else {
+        this.openModal(nonUpdate);
+      }
+    } else {
+      if (val.status == 'Devuelta por Instructor' || val.status == 'Agendada') {
+        if (val.status == 'Devuelta por Instructor') {
+          this.statusSet = ['Devuelta por Alumno', 'Agendada'];
+        } else if (val.status == 'Agendada') {
+          this.statusSet = ['Finalizada'];
+        }
+        this.openModal(content);
+      } else {
+        this.openModal(nonUpdate);
+      }
+    }
   }
 
   submit(): void {

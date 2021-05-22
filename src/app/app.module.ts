@@ -11,10 +11,13 @@ import { ScheduleComponent } from './pages/schedule/schedule.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PetitionComponent } from './pages/petition/petition.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from '@angular/common';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     ProfileComponent,
     LoginComponent,
     ScheduleComponent,
@@ -26,7 +29,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     AppRoutingModule,
     NgSelectModule,
-    NgbModule
+    NgbModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
