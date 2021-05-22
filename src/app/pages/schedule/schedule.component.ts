@@ -30,7 +30,9 @@ export class ScheduleComponent implements OnInit {
     private tutorialService: TutorialService,
     private modalService: NgbModal,
     private appComponent: AppComponent
-  ) { }
+  ) {
+    document.body.style.overflowY = "auto";
+  }
 
   ngOnInit(): void {
     this.userSession = JSON.parse(sessionStorage.getItem("userData"));
@@ -50,6 +52,8 @@ export class ScheduleComponent implements OnInit {
       reponse => {
         this.tutorialResponse = Object.assign(new Tutorial(), reponse.body);
         this.registeredId = this.tutorialResponse.idString;
+        console.log(this.tutorialResponse.idString);
+        console.log(this.registeredId);
         this.openModal(content);
       }
     );
@@ -86,5 +90,4 @@ export class ScheduleComponent implements OnInit {
   routerHome() {
     this.router.navigateByUrl("/home")
   }
-
 }

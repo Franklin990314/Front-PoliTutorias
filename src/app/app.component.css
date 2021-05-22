@@ -12,7 +12,7 @@
     text-align: center;
     padding: 0;
     margin: 0;
-    font-size:1.2rem;
+    font-size:1.0rem;
     color: #4D5656 ;
 }
 
@@ -22,15 +22,17 @@
 
 .ref-Container a {
     color: #0f385a;
-    font-size:1.2rem;
+    font-size:1.0rem;
 }
 
 .navbar-brand-Poli {
     font-size: 35px;
     font-weight: bold;
     color: white;
+    padding: 15px;
 }
 
 .margin-logo-Poli {
     margin: 10px;
+    margin-left: 0;
 }

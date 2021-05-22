@@ -21,6 +21,11 @@
     justify-content: center;
 }
 
+.container-Poli th, td {
+    font-size: 0.7em;
+    vertical-align: middle;
+}
+
 .title {
     color: #0f385a;
 }
@@ -39,6 +44,11 @@
 .label-Poli label {
     margin: 0;
     color:#0f385a;
+}
+
+.input-Poli {
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 .input-Poli p {

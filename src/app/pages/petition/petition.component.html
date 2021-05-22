@@ -1,28 +1,28 @@
 <div class="home-Poli" style="margin-bottom: 4%; text-align: left;">
     <a routerLink="home" class="nav-link navbar-brand" (click)="routerHome()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-            class="bi bi-arrow-left" viewBox="0 0 16 16">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left"
+            viewBox="0 0 16 16">
             <path fill-rule="evenodd"
                 d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
         </svg> Home
     </a>
 </div>
-<div class="container">
-    <div class="full-width">
-        <div style="margin-bottom: 8%;" class="container container-Poli">
-            <table class="table table-striped">
+<div class="container full-height">
+    <div style="height: auto;">
+        <div style="margin-bottom: 8%; height: auto;" class="container container-Poli">
+            <table class="table table-striped" width=100%>
                 <thead>
-                    <th>Nº Solicitud</th>
+                    <th width=10%>Nº Solicitud</th>
                     <ng-container *ngIf="!isTeacher">
-                        <th>Nombre Docente</th>
+                        <th width=20%>Nombre Docente</th>
                     </ng-container>
                     <ng-container *ngIf="isTeacher">
-                        <th>Nombre Estudiante</th>
+                        <th width=20%>Nombre Estudiante</th>
                     </ng-container>
-                    <th>Materia</th>
-                    <th>Estado</th>
-                    <th></th>
-                    <th>Acción</th>
+                    <th width=20%>Materia</th>
+                    <th width=15%>Estado</th>
+                    <th width=10%></th>
+                    <th width=25%>Acción</th>
                 </thead>
                 <tbody>
                     <tr *ngFor="let tutorial of tutorialSet; let i = index ">
@@ -38,14 +38,15 @@
                         <td><button class="btn btn-info btn-sm" (click)="infoModal(modalInfo, tutorial.id)">
                                 + ver más </button></td>
                         <td>
-                            <button class="btn btn-info btn-sm" (click)="updateModal(modalData, modalNonUpdate, tutorial)">
+                            <button class="btn btn-info btn-sm"
+                                (click)="updateModal(modalData, modalNonUpdate, tutorial)">
                                 Editar </button>
                             <ng-container *ngIf="!isTeacher">
                                 &nbsp;
-                                <button class='btn btn-danger btn-sm' (click)="deleteTutorial(tutorial.id)">
+                                <button class='btn btn-danger btn-sm' (click)="deleteTutorial(modalDelete, tutorial.idString, tutorial.id)">
                                     Eliminar</button>
                             </ng-container>
-                            
+
                         </td>
                     </tr>
                 </tbody>
@@ -65,10 +66,10 @@
         <div>
             <div class="row container-input">
                 <div class="col-xs-12 input-Poli">
-                    <div class="col-md-3 label-Poli">
+                    <div class="col-md-4 label-Poli">
                         <label for="isbn">Id:</label>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-8">
                         <input disabled type="text" class="form-control ent ent-idString" id="idString" name="idString"
                             autocomplete="off" [(ngModel)]="currentTutorial.idString">
                     </div>
@@ -76,10 +77,10 @@
             </div>
             <div class="row container-input">
                 <div class="col-xs-12 input-Poli">
-                    <div class="col-md-3 label-Poli">
+                    <div class="col-md-4 label-Poli">
                         <label for="isbn">Programa:</label>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-8">
                         <input disabled type="text" class="form-control ent ent-collegeCareer" id="collegeCareer"
                             name="collegeCareer" autocomplete="off" [(ngModel)]="currentTutorial.collegeCareer">
                     </div>
@@ -87,10 +88,10 @@
             </div>
             <div class="row container-input">
                 <div class="col-xs-12 input-Poli">
-                    <div class="col-md-3 label-Poli">
+                    <div class="col-md-4 label-Poli">
                         <label for="isbn">Materia:</label>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-8">
                         <input disabled type="text" class="form-control ent ent-course" id="course" name="course"
                             autocomplete="off" [(ngModel)]="currentTutorial.course">
                     </div>
@@ -98,10 +99,10 @@
             </div>
             <div class="row container-input">
                 <div class="col-xs-12 input-Poli">
-                    <div class="col-md-3 label-Poli">
+                    <div class="col-md-4 label-Poli">
                         <label for="isbn">Estado:</label>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-8">
                         <input disabled type="text" class="form-control ent ent-status" id="status" name="status"
                             autocomplete="off" [(ngModel)]="currentTutorial.status">
                     </div>
@@ -109,10 +110,10 @@
             </div>
             <div class="row container-input">
                 <div class="col-xs-12 input-Poli">
-                    <div class="col-md-3 label-Poli">
+                    <div class="col-md-4 label-Poli">
                         <label for="isbn">Docente:</label>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-8">
                         <input disabled type="text" class="form-control ent ent-instructor" id="instructor"
                             name="instructor" autocomplete="off" [(ngModel)]="currentTutorial.instructor">
                     </div>
@@ -120,33 +121,49 @@
             </div>
             <div class="row container-input">
                 <div class="col-xs-12 input-Poli">
-                    <div class="col-md-3 label-Poli">
+                    <div class="col-md-4 label-Poli">
                         <label for="isbn">Estudiante:</label>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-8" style="align-self: center;">
                         <input disabled type="text" class="form-control ent ent-student" id="student" name="student"
                             autocomplete="off" [(ngModel)]="currentTutorial.student">
                     </div>
                 </div>
             </div>
-            <div class="row container-input">
-                <div class="col-xs-12 input-Poli">
-                    <div class="col-md-3 label-Poli">
-                        <label for="isbn">Disponibilidad Sugerida:</label>
-                    </div>
-                    <div class="col-md-9">
-                        <input disabled type="text" class="form-control ent ent-availabilityStartTime"
-                            id="availabilityStartTime" name="availabilityStartTime" autocomplete="off"
-                            [(ngModel)]="currentTutorial.availabilityStartTime">
+            <ng-container *ngIf="currentTutorial.status == 'Agendada'">
+                <div class="row container-input">
+                    <div class="col-xs-12 input-Poli">
+                        <div class="col-md-4 label-Poli">
+                            <label for="isbn">Fecha tutoría:</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input disabled type="text" class="form-control ent ent-scheduledDate"
+                                id="scheduledDate" name="scheduledDate" autocomplete="off"
+                                [(ngModel)]="currentTutorial.scheduledDate">
+                        </div>
                     </div>
                 </div>
-            </div>
+            </ng-container>
+            <ng-container *ngIf="currentTutorial.status != 'Agendada'">
+                <div class="row container-input">
+                    <div class="col-xs-12 input-Poli">
+                        <div class="col-md-4 label-Poli">
+                            <label for="isbn">Disponibilidad Sugerida:</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input disabled type="text" class="form-control ent ent-availabilityStartTime"
+                                id="availabilityStartTime" name="availabilityStartTime" autocomplete="off"
+                                [(ngModel)]="currentTutorial.availabilityStartTime">
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
             <div class="row container-input">
                 <div class="col-xs-12 input-Poli">
-                    <div class="col-md-3 label-Poli">
+                    <div class="col-md-4 label-Poli">
                         <label for="isbn">Comentarios:</label>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-8">
                         <textarea disabled type="text" class="form-control ent ent-comment" id="comment" name="comment"
                             autocomplete="off" [(ngModel)]="currentTutorial.comment"></textarea>
                     </div>
@@ -168,14 +185,14 @@
         </button>
     </div>
     <div class="modal-body" style="padding-top: 30px;">
-        <form #localFormUpdate='ngForm' (ngSubmit)="submit()" accept-charset="UTF-8" role="form">
+        <form #localFormUpdate='ngForm' (ngSubmit)="validate(modalUpdate)" accept-charset="UTF-8" role="form">
             <div>
                 <div class="row container-input">
                     <div class="col-xs-12 input-Poli">
-                        <div class="col-md-3 label-Poli">
+                        <div class="col-md-4 label-Poli">
                             <label for="isbn">Id:</label>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-8">
                             <input disabled type="text" class="form-control ent ent-idString" id="idString"
                                 name="idString" autocomplete="off" [(ngModel)]="updateTutorial.idString">
                         </div>
@@ -183,10 +200,10 @@
                 </div>
                 <div class="row container-input">
                     <div class="col-xs-12 input-Poli">
-                        <div class="col-md-3 label-Poli">
+                        <div class="col-md-4 label-Poli">
                             <label for="isbn">Materia:</label>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-8">
                             <input disabled type="text" class="form-control ent ent-course" id="course" name="course"
                                 autocomplete="off" [(ngModel)]="updateTutorial.course">
                         </div>
@@ -194,24 +211,24 @@
                 </div>
                 <div class="row container-input">
                     <div class="col-xs-12 input-Poli">
-                        <div class="col-md-3 label-Poli">
+                        <div class="col-md-4 label-Poli">
                             <label for="isbn">Estado:</label>
                         </div>
-                        <div class="col-md-9">
-                            <select required class="form-control ent ent-instructor" id="status" name="status"
+                        <div class="col-md-8">
+                            <mat-select required class="form-control ent ent-instructor" id="status" name="status"
                                 [(ngModel)]="updateTutorial.status">
-                                <option *ngFor="let status of statusSet" [ngValue]="status">{{ status }}
-                                </option>
-                            </select>
+                                <mat-option *ngFor="let status of statusSet" [value]="status">{{ status }}
+                                </mat-option>
+                            </mat-select>
                         </div>
                     </div>
                 </div>
                 <div class="row container-input">
                     <div class="col-xs-12 input-Poli">
-                        <div class="col-md-3 label-Poli">
+                        <div class="col-md-4 label-Poli">
                             <label for="isbn">Docente:</label>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-8">
                             <input disabled type="text" class="form-control ent ent-instructor" id="instructor"
                                 name="instructor" autocomplete="off" [(ngModel)]="updateTutorial.instructor">
                         </div>
@@ -219,10 +236,10 @@
                 </div>
                 <div class="row container-input">
                     <div class="col-xs-12 input-Poli">
-                        <div class="col-md-3 label-Poli">
+                        <div class="col-md-4 label-Poli">
                             <label for="isbn">Estudiante:</label>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-8">
                             <input disabled type="text" class="form-control ent ent-student" id="student" name="student"
                                 autocomplete="off" [(ngModel)]="updateTutorial.student">
                         </div>
@@ -238,25 +255,25 @@
                     </div>
                     <div class="row container-input">
                         <div class="col-xs-12 input-Poli">
-                            <div class="col-md-3 label-Poli">
+                            <div class="col-md-4 label-Poli">
                                 <label for="days">Días:</label>
                             </div>
-                            <div class="col-md-9">
-                                <ng-select required name="availabilityDate" bindLabel="name" appendTo="body" multiple="true"
-                                    [(ngModel)]="updateTutorial.availabilityDate"
-                                    class="form-control ent ent-availabilityDate">
-                                    <ng-option *ngFor="let day of days" [value]="day">{{ day }}</ng-option>
-                                </ng-select>
+                            <div class="col-md-8">
+                                <mat-select required name="availabilityDate" bindLabel="name" appendTo="body"
+                                    multiple="true" [(ngModel)]="updateTutorial.availabilityDate"
+                                    class="form-control ent ent-availabilityDate" multiple>
+                                    <mat-option *ngFor="let day of days" [value]="day">{{ day }}</mat-option>
+                                </mat-select>
                             </div>
                         </div>
                     </div>
                     <div class="row container-input">
                         <div class="col-xs-12 input-Poli">
-                            <div class="col-md-3 label-Poli">
+                            <div class="col-md-4 label-Poli">
                                 <label for="isbn">Hora Inicio:</label>
                             </div>
-                            <div class="col-md-9">
-                                <input required type="text" class="form-control ent ent-availabilityStartTime"
+                            <div class="col-md-8">
+                                <input matInput required type="time" class="form-control ent ent-availabilityStartTime"
                                     placeholder="hh:mm" id="availabilityStartTime" name="availabilityStartTime"
                                     autocomplete="off" [(ngModel)]="updateTutorial.availabilityStartTime">
                             </div>
@@ -264,11 +281,11 @@
                     </div>
                     <div class="row container-input">
                         <div class="col-xs-12 input-Poli">
-                            <div class="col-md-3 label-Poli">
+                            <div class="col-md-4 label-Poli">
                                 <label for="isbn">Hora Fin:</label>
                             </div>
-                            <div class="col-md-9">
-                                <input required type="text" class="form-control ent ent-availabilityEndTime"
+                            <div class="col-md-8">
+                                <input matInput required type="time" class="form-control ent ent-availabilityEndTime"
                                     id="availabilityEndTime" name="availabilityEndTime" autocomplete="off"
                                     placeholder="hh:mm" [(ngModel)]="updateTutorial.availabilityEndTime">
                             </div>
@@ -278,23 +295,71 @@
                 <ng-container *ngIf="updateTutorial.status == 'Agendada'">
                     <div class="row container-input">
                         <div class="col-xs-12 input-Poli">
-                            <div class="col-md-3 label-Poli">
-                                <label for="days">Fecha de Agendamiento:</label>
+                            <div class="col-md-4 label-Poli">
+                                <label for="isbn">Disponibilidad:</label>
                             </div>
-                            <div class="col-md-9">
-                                <input required type="text" class="form-control ent ent-scheduledDate"
-                                    id="scheduledDate" name="scheduledDate" autocomplete="off"
-                                    placeholder="hh:mm" [(ngModel)]="updateTutorial.scheduledDate">
+                            <div class="col-md-8">
+                                <input disabled type="text" class="form-control ent ent-availabilityStartTime_1"
+                                    id="availabilityStartTime_1" name="availabilityStartTime_1" autocomplete="off"
+                                    [(ngModel)]="currentTutorial.availabilityStartTime">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row container-input">
+                        <div class="col-xs-12 input-Poli">
+                            <div class="col-md-12 title-label-Poli">
+                                <label for="isbn">Fecha Agendamiento</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row container-input">
+                        <div class="col-xs-12 input-Poli">
+                            <div class="col-md-4 label-Poli">
+                                <label for="days">Días:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <div style="display: flex;">
+                                    <input matInput [matDatepicker]="picker" required
+                                        class="form-control ent ent-scheduledDate" id="scheduledDate"
+                                        name="scheduledDate" autocomplete="off"
+                                        [(ngModel)]="updateTutorial.scheduledDate">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row container-input">
+                        <div class="col-xs-12 input-Poli">
+                            <div class="col-md-4 label-Poli">
+                                <label for="isbn">Hora Inicio:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input matInput required type="time" class="form-control ent ent-availabilityStartTime"
+                                    placeholder="hh:mm" id="availabilityStartTime" name="availabilityStartTime"
+                                    autocomplete="off" [(ngModel)]="updateTutorial.availabilityStartTime">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row container-input">
+                        <div class="col-xs-12 input-Poli">
+                            <div class="col-md-4 label-Poli">
+                                <label for="isbn">Hora Fin:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input matInput required type="time" class="form-control ent ent-availabilityEndTime"
+                                    id="availabilityEndTime" name="availabilityEndTime" autocomplete="off"
+                                    placeholder="hh:mm" [(ngModel)]="updateTutorial.availabilityEndTime">
                             </div>
                         </div>
                     </div>
                 </ng-container>
                 <div class="row container-input">
                     <div class="col-xs-12 input-Poli">
-                        <div class="col-md-3 label-Poli">
+                        <div class="col-md-4 label-Poli">
                             <label for="isbn">Comentarios:</label>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-8">
                             <textarea type="text" class="form-control ent ent-comment" id="comment" name="comment"
                                 autocomplete="off" [(ngModel)]="updateTutorial.comment"></textarea>
                         </div>
@@ -302,26 +367,98 @@
                 </div>
             </div>
             <div class="modal-footer" style="justify-content: center;">
-                <input class="btn btn-primary btn-Poli" type="submit" value="Guardar" [disabled]="!localFormUpdate.valid">
+                <input class="btn btn-primary btn-Poli" type="submit" value="Guardar"
+                    [disabled]="!localFormUpdate.valid">
             </div>
         </form>
     </div>
 </ng-template>
 
 <ng-template #modalNonUpdate let-modal>
-    <div class="modal-body">
-        <div style="width: 400px; margin: auto; text-align: center;">
-            <p>El radicado: {{ updateTutorial.idString }} se encuentra en estado {{ updateTutorial.status  }}, 
-            <ng-container *ngIf="!isTeacher">
-                tiene que esperar a que el docente asignado gestione la petición
-            </ng-container>
-            <ng-container *ngIf="isTeacher">
-                tiene que esperar a que el estudiante asignado gestione la petición
-            </ng-container>
-            </p>
+    <div class="modal-body modal-Poli">
+        <div style="margin: auto; text-align: center;">
+            <div class="row col-xs-12 alert alert-warning fade show warning-Poli">
+                <div class="col-md-3 non-padding-margin">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="55" height="55" fill="currentColor"
+                    class="bi bi-patch-exclamation" viewBox="0 0 16 16">
+                    <path
+                        d="M7.001 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.553.553 0 0 1-1.1 0L7.1 4.995z" />
+                    <path
+                        d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z" />
+                </svg>
+                </div>
+                <div class="col-md-9 message non-padding-margin">
+                    <a>El radicado: <strong>{{updateTutorial.idString}}</strong> se encuentra en estado
+                        <strong>"{{updateStatus}}"</strong>,
+                        <ng-container *ngIf="!isTeacher">
+                            tiene que esperar a que el docente asignado gestione la petición
+                        </ng-container>
+                        <ng-container *ngIf="isTeacher">
+                            tiene que esperar a que el estudiante asignado gestione la petición
+                        </ng-container>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
     <div class="modal-footer" style="align-self: center;">
         <button type="button" class="btn btn-primary btn-Poli" (click)="modal.close('Save click')">Aceptar</button>
+    </div>
+</ng-template>
+
+<ng-template #modalUpdate let-modal>
+    <div class="modal-body modal-Poli">
+        <div style="margin: auto; text-align: center;">
+            <div class="row col-xs-12 alert alert-warning fade show warning-Poli">
+                <div class="col-md-3 non-padding-margin">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="55" height="55" fill="currentColor"
+                        class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
+                        <path
+                            d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z" />
+                        <path
+                            d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z" />
+                    </svg>
+                </div>
+                <div class="col-md-9 message non-padding-margin">
+                    <a>Esta a punto de modificar el estado del radicado: <strong>{{updateTutorial.idString}}</strong>,
+                        ¿Quiere continuar?
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer" style="align-self: center;">
+        <button type="button" style="margin: 0;" class="btn btn-primary btn-Poli"
+            (click)="submit()">Aceptar</button>
+        <button type="button" style="margin-left: 90px;" class="btn btn-primary btn-Poli"
+            (click)="modal.close('Save click')">Cancelar</button>
+    </div>
+</ng-template>
+
+<ng-template #modalDelete let-modal>
+    <div class="modal-body modal-Poli">
+        <div style="margin: auto; text-align: center;">
+            <div class="row col-xs-12 alert alert-danger fade show warning-Poli">
+                <div class="col-md-3 non-padding-margin">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="55" height="55" fill="currentColor"
+                        class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
+                        <path
+                            d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z" />
+                        <path
+                            d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z" />
+                    </svg>
+                </div>
+                <div class="col-md-9 message non-padding-margin">
+                    <a>Esta a punto de eliminar el radicado: <strong>{{deleteIdString}}</strong>, ¿Quiere continuar?
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer" style="align-self: center;">
+        <button type="button" style="margin: 0;" class="btn btn-primary btn-Poli"
+            (click)="delete()">Aceptar</button>
+        <button type="button" style="margin-left: 90px;" class="btn btn-primary btn-Poli"
+            (click)="modal.close('Save click')">Cancelar</button>
     </div>
 </ng-template>

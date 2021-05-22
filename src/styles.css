@@ -43,11 +43,13 @@ html {
 }
 
 .btn-Poli {
-    font-size:1.2rem;
+    font-size: 0.9em !important;
     padding-left: 25px;
     padding-right: 25px;
     background-color: #0f385a;
     border-color: #0f385a;
+    margin: 0;
+    height: auto;
 }
 
 .modal-Poli .modal-dialog {
@@ -68,3 +70,47 @@ html {
     color: #0f385a;
     font-weight: bold;
 }
+
+.modal-Poli {
+    text-align: -webkit-center;
+}
+
+.success-Poli svg {
+    color: green;
+}
+
+.warning-Poli svg {
+    color:darkgoldenrod;
+}
+
+.alert-danger svg {
+    color:darkred;
+}
+
+.alert {
+    text-align: center;
+    justify-content: center;
+    font-size: 0.9em;
+    margin: 0;
+}
+
+.alert a {
+    align-self: center;
+    font-size: 0.9em;
+}
+
+.alert .message {
+    align-self: center;
+}
+
+.ent {
+    text-align-last: left !important;
+    font-size: 0.85em;
+}
+
+.cdk-overlay-connected-position-bounding-box {
+    z-index: 99999 !important;
+  }
+
+  
+.cdk-global-overlay-wrapper, .cdk-overlay-container { z-index: 9999!important; } 

@@ -23,6 +23,9 @@ export class PetitionComponent implements OnInit {
   public days = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado'];
   public statusSet = [''];
   public isTeacher: boolean;
+  public updateStatus: string;
+  private deleteId: number;
+  public deleteIdString: string;
 
   constructor(
     private router: Router,
@@ -61,15 +64,18 @@ export class PetitionComponent implements OnInit {
 
   updateModal(content: any, nonUpdate: any, val: Tutorial) {
     this.updateTutorial = new Tutorial();
+    this.updateTutorial.id = val.id;
     this.updateTutorial.idString = val.idString;
     this.updateTutorial.course = val.course;
     this.updateTutorial.instructor = val.instructor;
     this.updateTutorial.student = val.student;
     this.updateTutorial.availabilityDate = val.availabilityDate;
+    this.updateStatus = val.status;
     if (this.isTeacher) {
       if (val.status == 'Creada' || val.status == 'Devuelta por Alumno') {
         this.statusSet = ['Devuelta por Instructor', 'Agendada'];
-        this.openModal(content);
+        console.log(this.statusSet);
+        this.infoModal(content, val.id);
       } else {
         this.openModal(nonUpdate);
       }
@@ -80,11 +86,15 @@ export class PetitionComponent implements OnInit {
         } else if (val.status == 'Agendada') {
           this.statusSet = ['Finalizada'];
         }
-        this.openModal(content);
+        this.infoModal(content, val.id);
       } else {
         this.openModal(nonUpdate);
       }
     }
+  }
+
+  validate(content: any): void {
+    this.openModal(content);
   }
 
   submit(): void {
@@ -92,14 +102,23 @@ export class PetitionComponent implements OnInit {
     this.tutorialService.put(this.updateTutorial.id, this.updateTutorial).subscribe(
       reponse => {
         this.updateTutorial = Object.assign(new Tutorial(), reponse.body);
+        this.modalService.dismissAll();
         this.ngOnInit();
       }
     );
   }
 
-  deleteTutorial(val: number): void {
-    this.tutorialService.delete(val).subscribe(
+  deleteTutorial(content: any, idString: string, val: number): void {
+    this.deleteId = val;
+    this.deleteIdString = idString;
+    this.openModal(content);
+  }
+
+  delete(): void {
+    this.tutorialService.delete(this.deleteId).subscribe(
       reponse => {
+        this.deleteId = null;
+        this.modalService.dismissAll();
         this.ngOnInit();
         console.log(reponse);
       }

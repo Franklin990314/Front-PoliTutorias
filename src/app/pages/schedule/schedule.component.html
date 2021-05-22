@@ -1,7 +1,7 @@
 <div class="home-Poli" style="margin-bottom: 4%; text-align: left;">
     <a routerLink="home" class="nav-link navbar-brand" (click)="routerHome()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-            class="bi bi-arrow-left" viewBox="0 0 16 16">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left"
+            viewBox="0 0 16 16">
             <path fill-rule="evenodd"
                 d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
         </svg> Home
@@ -31,9 +31,12 @@
                             <label for="courses">Materia:</label>
                         </div>
                         <div class="col-md-9">
-                            <select required class="form-control ent ent-course" id="course" name="course" (change)="onChange()" [(ngModel)]="tutorial.course">
-                                <option *ngFor="let course of courses.parameter" [ngValue]="course.id">{{ course.value }}</option>
-                            </select>
+                            <mat-select required class="form-control ent ent-course" id="course" name="course"
+                                (selectionChange)="onChange()" [(ngModel)]="tutorial.course">
+                                <mat-option *ngFor="let course of courses.parameter" [value]="course.id">{{ course.value
+                                    }}</mat-option>
+                            </mat-select>
+
                         </div>
                     </div>
                 </div>
@@ -43,10 +46,11 @@
                             <label for="isbn">Docente:</label>
                         </div>
                         <div class="col-md-9">
-                            <select required class="form-control ent ent-instructor" id="instructor" name="instructor" [(ngModel)]="tutorial.instructor">
-                                <option *ngFor="let instructor of instructors.parameter" [ngValue]="instructor.id">{{ instructor.value  }}
-                                </option>
-                            </select>
+                            <mat-select required class="form-control ent ent-instructor" id="instructor"
+                                name="instructor" [(ngModel)]="tutorial.instructor">
+                                <mat-option *ngFor="let instructor of instructors.parameter" [value]="instructor.id">{{
+                                    instructor.value }}</mat-option>
+                            </mat-select>
                         </div>
                     </div>
                 </div>
@@ -63,10 +67,11 @@
                             <label for="days">Días:</label>
                         </div>
                         <div class="col-md-9">
-                            <ng-select required name="availabilityDate" bindLabel="name" appendTo="body" multiple="true"
-                                [(ngModel)]="tutorial.availabilityDate" class="form-control ent ent-availabilityDate">
-                                <ng-option *ngFor="let day of days" [value]="day">{{ day }}</ng-option>
-                            </ng-select>
+                            <mat-select required name="availabilityDate" bindLabel="name" appendTo="body"
+                                multiple="true" [(ngModel)]="tutorial.availabilityDate"
+                                class="form-control ent ent-availabilityDate" multiple>
+                                <mat-option *ngFor="let day of days" [value]="day">{{ day }}</mat-option>
+                            </mat-select>
                         </div>
                     </div>
                 </div>
@@ -76,9 +81,9 @@
                             <label for="isbn">Hora Inicio:</label>
                         </div>
                         <div class="col-md-9">
-                            <input required type="text" class="form-control ent ent-availabilityStartTime" placeholder="hh:mm"
-                                id="availabilityStartTime" name="availabilityStartTime" autocomplete="off"
-                                [(ngModel)]="tutorial.availabilityStartTime">
+                            <input matInput required type="time" class="form-control ent ent-availabilityStartTime"
+                                placeholder="hh:mm" id="availabilityStartTime" name="availabilityStartTime"
+                                autocomplete="off" [(ngModel)]="tutorial.availabilityStartTime">
                         </div>
                     </div>
                 </div>
@@ -88,9 +93,9 @@
                             <label for="isbn">Hora Fin:</label>
                         </div>
                         <div class="col-md-9">
-                            <input required type="text" class="form-control ent ent-availabilityEndTime" id="availabilityEndTime"
-                                name="availabilityEndTime" autocomplete="off" placeholder="hh:mm"
-                                [(ngModel)]="tutorial.availabilityEndTime">
+                            <input matInput required type="time" class="form-control ent ent-availabilityEndTime"
+                                id="availabilityEndTime" name="availabilityEndTime" autocomplete="off"
+                                placeholder="hh:mm" [(ngModel)]="tutorial.availabilityEndTime">
                         </div>
                     </div>
                 </div>
@@ -103,9 +108,22 @@
 </div>
 
 <ng-template #modalInfo let-modal>
-    <div class="modal-body">
-        <div style="width: 400px; margin: auto; text-align: center;">
-            <p>Su caso ha sido creado con el radicado: {{ registeredId }}</p>
+    <div class="modal-body modal-Poli">
+        <div style="margin: auto; text-align: center;">
+            <div class="row col-xs-12 alert alert-success fade show success-Poli">
+                <div class="col-md-3 non-padding-margin">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="55" height="55" fill="currentColor"
+                        class="bi bi-patch-check" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M10.354 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+                        <path
+                            d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z" />
+                    </svg>
+                </div>
+                <div class="col-md-9 message non-padding-margin">
+                    <a>Su caso ha sido creado con el radicado: <strong>{{registeredId}}</strong></a>
+                </div>
+            </div>
         </div>
     </div>
     <div class="modal-footer" style="align-self: center;">
